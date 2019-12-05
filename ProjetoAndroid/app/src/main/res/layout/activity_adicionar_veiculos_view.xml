@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/bt_salvar"
+        android:id="@+id/bt_relatorio"
         android:layout_width="104dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
