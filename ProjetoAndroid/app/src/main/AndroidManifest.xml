@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListaVeiculosView"></activity>
+        <activity android:name=".AdicionarVeiculosView"></activity>
+        <activity android:name=".ListaVeiculosView" />
     </application>
 
 </manifest>
