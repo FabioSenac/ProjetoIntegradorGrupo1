@@ -20,9 +20,9 @@ public class AbastecimentosView extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),RelatoriosView.class);
+                Intent i = new Intent(getApplicationContext(),AdicionarAbastecimentoView.class);
                 startActivity(i);
-                Toast.makeText(getApplicationContext(), "tela de registro veiculo", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "tela de de registro de abastecimento", Toast.LENGTH_LONG).show();
 
             }
         });
