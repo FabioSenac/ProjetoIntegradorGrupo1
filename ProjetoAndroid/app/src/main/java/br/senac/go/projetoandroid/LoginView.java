@@ -15,14 +15,6 @@ public class LoginView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_view);
        Button bt = findViewById(R.id.bt_login);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),ListaVeiculosView.class);
-                startActivity(i);
-                Toast.makeText(getApplicationContext(), "tela de registro veiculo", Toast.LENGTH_LONG).show();
 
-            }
-        });
     }
 }
