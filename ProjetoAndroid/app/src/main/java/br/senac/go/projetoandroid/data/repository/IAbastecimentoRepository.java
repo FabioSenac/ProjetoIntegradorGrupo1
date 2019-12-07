@@ -9,7 +9,7 @@ import br.senac.go.projetoandroid.data.model.Abastecimento;
 public interface IAbastecimentoRepository {
 
 void getAll(Callback<List<Abastecimento>> callback);
-void createAbastecimento(Callback<Abastecimento>callback, Abastecimento abastecimento);
+void createAbastecimento(Callback<Abastecimento>callback, Abastecimento abastecimento );
 
     interface Callback<ResultType> {
         void onResult(ResultType result);
