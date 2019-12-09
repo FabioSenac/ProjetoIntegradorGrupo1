@@ -1,8 +1,12 @@
 package br.senac.go.projetoandroid.data.model;
 
-import java.util.Objects;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+@Entity
 public class Veiculos {
+    @PrimaryKey
     private Long id;
     private String placa;
     private String tipo;

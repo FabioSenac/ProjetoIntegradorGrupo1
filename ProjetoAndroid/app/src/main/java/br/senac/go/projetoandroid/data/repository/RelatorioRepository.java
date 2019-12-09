@@ -9,29 +9,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RelatorioRepository implements RelatorioApiSource {
+public class RelatorioRepository implements IRelatorioRepository {
 
-private RelatorioApiSource relatorioApiSource;
+    private RelatorioApiSource relatorioApiSource;
 
     public RelatorioRepository(RelatorioApiSource relatorioApiSource) {
         this.relatorioApiSource = relatorioApiSource;
     }
 
+
     @Override
-    public Call<List<Relatorio>> getAll() {
-        relatorioApiSource.getAll().enqueue(new Callback<List<Relatorio>>() {
+    public void getAll(final Callback<List<Relatorio>> callback) {
+        relatorioApiSource.getAll().enqueue(new retrofit2.Callback<List<Relatorio>>() {
             @Override
             public void onResponse(Call<List<Relatorio>> call, Response<List<Relatorio>> response) {
-                IRelatorioRepository.Callback<List<Relatorio>> callback = null;
                 callback.onResult(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Relatorio>> call, Throwable t) {
-                IRelatorioRepository.Callback callback = null;
                 callback.onEmpty();
             }
         });
-        return null;
     }
 }

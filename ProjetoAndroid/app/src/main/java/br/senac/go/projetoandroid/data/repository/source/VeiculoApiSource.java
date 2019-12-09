@@ -3,6 +3,7 @@ package br.senac.go.projetoandroid.data.repository.source;
 import java.util.List;
 
 
+import br.senac.go.projetoandroid.data.model.Veiculos;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
