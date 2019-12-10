@@ -1,32 +1,93 @@
-create table veiculo
-(
-  vei_id serial not null primary key,
-  vei_placa varchar(10),
-  vei_tipo  varchar(10)	
-);
-create table usuario
-(
-  usu_id serial not null primary key,
-  usu_nome varchar(40),
-  usu_senha varchar(10)
-);
+-- Table: public.abastecimento
 
-create table posto
-(
-  pos_id serial not null primary key,
-  pos_nome varchar(60)
-);
+-- DROP TABLE public.abastecimento;
 
-create table abastecimento
+CREATE TABLE public.abastecimento
 (
-  abas_id serial not null primary key,
-  abas_data date,
-  abas_totLitros float,
-  abas_odometro Integer,
-  abas_vlr_unit float,
-   vei_id int not null,
-  constraint rel_veiculo_abastecimento foreign key (vei_id) references veiculo,
-   pos_id int not null,
-  constraint rel_posto_abastecimento foreign key (pos_id) references posto
+    abas_id integer NOT NULL DEFAULT nextval('abastecimento_abas_id_seq'::regclass),
+    abas_data date,
+    abas_totlitros double precision,
+    abas_odometro integer,
+    abas_vlr_unit double precision,
+    vei_id integer NOT NULL,
+    pos_id integer NOT NULL,
+    CONSTRAINT abastecimento_pkey PRIMARY KEY (abas_id),
+    CONSTRAINT rel_posto_abastecimento FOREIGN KEY (pos_id)
+        REFERENCES public.posto (pos_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT rel_veiculo_abastecimento FOREIGN KEY (vei_id)
+        REFERENCES public.veiculo (vei_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.abastecimento
+    OWNER to postgres;
 	
-);
+=========================================================
+
+-- Table: public.posto
+
+-- DROP TABLE public.posto;
+
+CREATE TABLE public.posto
+(
+    pos_id integer NOT NULL DEFAULT nextval('posto_pos_id_seq'::regclass),
+    pos_nome character varying(60) COLLATE pg_catalog."default",
+    CONSTRAINT posto_pkey PRIMARY KEY (pos_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.posto
+    OWNER to postgres;	
+	
+=========================================================
+
+-- Table: public.usuario
+
+-- DROP TABLE public.usuario;
+
+CREATE TABLE public.usuario
+(
+    usu_id integer NOT NULL DEFAULT nextval('usuario_usu_id_seq'::regclass),
+    usu_nome character varying(40) COLLATE pg_catalog."default",
+    usu_senha character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT usuario_pkey PRIMARY KEY (usu_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.usuario
+    OWNER to postgres;
+	
+=========================================================
+-- Table: public.veiculo
+
+-- DROP TABLE public.veiculo;
+
+CREATE TABLE public.veiculo
+(
+    vei_id integer NOT NULL DEFAULT nextval('veiculo_vei_id_seq'::regclass),
+    vei_placa character varying(10) COLLATE pg_catalog."default",
+    vei_tipo character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT veiculo_pkey PRIMARY KEY (vei_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.veiculo
+    OWNER to postgres;
+
+=========================================================	
