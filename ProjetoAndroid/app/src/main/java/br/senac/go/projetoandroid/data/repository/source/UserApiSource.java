@@ -15,4 +15,6 @@ public interface UserApiSource {
 
     @POST("/usuario")
     Call<Usuario> createUsuario(@Body Usuario usuario);
+
+    Call createUsuario(String name, String senha);
 }

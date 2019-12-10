@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
+import br.senac.go.projetoandroid.data.repository.source.UserApiSource;
+
 @Entity
 public class Usuario {
 
@@ -12,6 +14,10 @@ public class Usuario {
     private Long id;
     private String name;
     private String senha;
+
+    public static UserApiSource getUserApiSource() {
+        return null;
+    }
 
     public Long getId() {
         return id;
