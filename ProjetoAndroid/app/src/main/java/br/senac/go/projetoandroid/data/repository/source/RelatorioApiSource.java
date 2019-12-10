@@ -4,11 +4,12 @@ import java.util.List;
 
 
 import br.senac.go.projetoandroid.data.model.Relatorio;
+import br.senac.go.projetoandroid.data.model.Usuario;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface RelatorioApiSource {
 
-    @GET("/SaidaAbast")
-    Call<List<Relatorio>> getAll();
+    @GET("/usuario")
+    Call<List<Usuario>> getAll();
 }
