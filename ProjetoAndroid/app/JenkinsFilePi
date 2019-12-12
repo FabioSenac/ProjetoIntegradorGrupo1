@@ -1,0 +1,38 @@
+pipeline{
+    agent any
+    environment{
+        PIGrupo1 = "$WORKSPACE/ProjetoIntegradorGrupo1/ProjetoAndroid"
+    }
+    stages{
+        stage ('Criando ambiente'){
+            steps {
+                echo 'Criando wrapper para gradle'
+              	dir("$PIGrupo1"){
+				sh 'gradle wrapper'
+                }
+            }
+        }
+        stage ('Criando Testes JUnit'){
+            steps{
+                echo 'Criando testes JUnit'
+                dir("$pPIGrupo1"){
+				sh './gradlew test'
+                }
+            }
+        }
+        stage ('Construindo o APK'){
+            steps{
+                echo 'Construindo o APK'
+                dir("$PIGrupo1"){
+				sh './gradlew assembleRelease'
+                }
+            }
+        }
+        stage ('Arquivando o APK'){
+            steps{
+                echo 'Arquivando o APK'
+                archiveArtifacts artifacts: '**/app_debug.apk', fingerprint:false , allowEmptyArchive: true
+            }
+        }
+    }
+}
