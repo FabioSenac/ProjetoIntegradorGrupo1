@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 
 public interface RelatorioApiSource {
 
-    @GET("/usuario")
-    Call<List<Usuario>> getAll();
+    @GET("/relatorio")
+    Call<List<Relatorio>> getAll();
 }

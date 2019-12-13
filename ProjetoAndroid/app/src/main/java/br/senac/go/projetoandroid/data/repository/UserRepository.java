@@ -19,34 +19,17 @@ public class UserRepository implements IUserRepository {
 
 
     @Override
-    public void getAll(final Callback<List<Usuario>> callback) {
-        userApiSource.getAll().enqueue(new retrofit2.Callback<List<Usuario>>() {
-            @Override
-            public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                callback.onResult(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                callback.onEmpty();
-            }
-        });
-
+    public void getAll(Callback<List<Usuario>> callback) {
 
     }
 
     @Override
-    public void createUsuario(final Callback<Usuario> callback, Usuario usuario) {
-userApiSource.getAll().enqueue(new retrofit2.Callback<List<Usuario>>() {
-    @Override
-    public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-        callback.onResult((Usuario) response.body());
+    public void createUsuario(Callback<Usuario> callback, Usuario usuario) {
+
     }
 
     @Override
-    public void onFailure(Call<List<Usuario>> call, Throwable t) {
+    public void createUsuario(Call<Usuario> usuarioCall) {
 
-    }
-});
     }
 }

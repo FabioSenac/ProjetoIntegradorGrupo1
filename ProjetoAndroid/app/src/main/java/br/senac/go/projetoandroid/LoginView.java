@@ -25,6 +25,7 @@ public class LoginView extends AppCompatActivity {
     EditText et_senha;
     Button bt_login;
     UserApiSource userApiSource;
+    private IUserRepository UserRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +36,48 @@ public class LoginView extends AppCompatActivity {
         et_nome = (EditText) findViewById(R.id.et_nome);
         et_senha = (EditText) findViewById(R.id.et_senha);
         bt_login = (Button) findViewById(R.id.bt_login);
-        userApiSource = Usuario.getUserApiSource();
+        //userApiSource = LoginView.RESULT_FIRST_USER;
+
+
+        String usu_id;
+        Object usu_nome;
+        final Usuario user= new Usuario();
+        user.setUsu_nome("name");
+        user.getUsu_senha();
+
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = et_nome.getText().toString();
+                final String name = et_nome.getText().toString();
                 String senha = et_senha.getText().toString();
                 if (validateLogin(name, senha)) {
 
-                    doLogin(name, senha);
+                    //doLogin(name, senha);
                 }
+
+                UserRepository.createUsuario(new IUserRepository.Callback<Usuario>() {
+
+                    @Override
+                    public void onResult(Usuario result) {
+                        Intent intent = new Intent(getApplicationContext(),ListaVeiculosView.class);
+                        //Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                        intent.putExtra("name",name);
+                        startActivity(intent);
+
+                        Toast.makeText(LoginView.this, "Salvo com Sucesso" + result.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Toast.makeText(LoginView.this, "erro na senha", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onEmpty() {
+                        Toast.makeText(LoginView.this, "o nome esta incorreto", Toast.LENGTH_SHORT).show();
+                    }
+                }, user);
 
             }
         });
@@ -65,34 +97,5 @@ public class LoginView extends AppCompatActivity {
         return true;
     }
 
-    private void doLogin(final String name, String senha) {
-        Call call = userApiSource.createUsuario(name,senha);
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                if (response.isSuccessful()) {
-                    Usuario usuario = (Usuario) response.body();
-                    if (usuario.getId().equals("true")) {
-                        //login start
-                        Intent intent = new Intent(LoginView.this, LoginView.class);
-                        intent.putExtra("username", name);
-                        startActivity(intent);
 
-                    } else {
-                        Toast.makeText(LoginView.this, "o nome esta incorreto", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(LoginView.this, "erro na senha", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(LoginView.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-
-
-        });
-    }
 }
