@@ -15,5 +15,5 @@ public interface VeiculoApiSource {
     Call<List<Veiculos>> getAll();
 
     @POST("/veiculo")
-    Call<Veiculos> createVeiculo(@Body Veiculos veiculos);
+    Call<Veiculos> postVeiculo(@Body Veiculos veiculos);
 }

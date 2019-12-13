@@ -5,12 +5,14 @@ import java.util.List;
 import br.senac.go.projetoandroid.data.model.Veiculos;
 import br.senac.go.projetoandroid.data.repository.source.VeiculoApiSource;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VeiculoRepository implements  IVeiculoRepository {
+public class VeiculoRepository implements IVeiculoRepository {
 
-   private VeiculoApiSource veiculoApiSource;
-    public VeiculoRepository (VeiculoApiSource veiculoApiSource) {
+    private VeiculoApiSource veiculoApiSource;
+
+    public VeiculoRepository(VeiculoApiSource veiculoApiSource) {
         this.veiculoApiSource = veiculoApiSource;
 
 
@@ -32,8 +34,8 @@ public class VeiculoRepository implements  IVeiculoRepository {
     }
 
     @Override
-    public void createVeiculo(final Callback<Veiculos> callback, Veiculos veiculos) {
-        veiculoApiSource.createVeiculo(veiculos).enqueue(new retrofit2.Callback<Veiculos>() {
+    public void postVeiculo(Veiculos veiculos, final RepositorioCallback<Veiculos> callback) {
+        veiculoApiSource.postVeiculo(veiculos).enqueue(new retrofit2.Callback<Veiculos>() {
             @Override
             public void onResponse(Call<Veiculos> call, Response<Veiculos> response) {
                 callback.onResult(response.body());
@@ -44,9 +46,7 @@ public class VeiculoRepository implements  IVeiculoRepository {
 
             }
         });
-
     }
-
 
 
 }
