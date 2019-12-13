@@ -6,7 +6,8 @@ import br.senac.go.projetoandroid.data.model.Veiculos;
 
 public interface IVeiculoRepository {
     void getAll(IVeiculoRepository.Callback<List<Veiculos>> callback);
-    void createVeiculo(IVeiculoRepository.Callback<Veiculos> callback, Veiculos veiculos);
+
+    void postVeiculo(Veiculos veiculos, RepositorioCallback<Veiculos> callback);
 
     interface Callback<ResultType> {
         void onResult(ResultType result);
